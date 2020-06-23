@@ -1,0 +1,22 @@
+package demo;
+
+import javax.persistence.*;
+
+@Entity
+@Table(name="instructor")
+public class Instructor {
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="id")
+	private int id;
+	
+	@Column(name="first_name")
+	private String FirstName;
+	
+	@Column(name="last_name")
+	private String LastName;
+	
+	@Column(name="email")
+	private String email;
+}

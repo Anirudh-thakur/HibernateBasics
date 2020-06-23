@@ -1,0 +1,37 @@
+package demo;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
+
+public class CreateMappedStudentCourse {
+
+	public static void main(String[] args) {
+	  //Creating session and factory methods 
+		SessionFactory factory = new Configuration().configure().addAnnotatedClass(Course.class).addAnnotatedClass(Student.class).buildSessionFactory();
+		Session session = factory.getCurrentSession();
+		
+		try
+		{
+			//Creating Student and course objects
+			Student s1 = new Student("Anirudh","Thakur","anirudh.thakur");
+			Student s2 = new Student("Anirudh","Thakur","anirudh.thakur");
+			Student s3 = new Student("Anirudh","Thakur","anirudh.thakur");
+			
+			Course c1 = new Course("Spring");
+			Course c2 = new Course("Hibernate");
+			Course c3 = new Course("Guitar");
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			session.close();
+			factory.close();
+		}
+
+	}
+
+}

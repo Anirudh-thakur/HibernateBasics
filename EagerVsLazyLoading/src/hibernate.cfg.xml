@@ -1,0 +1,38 @@
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+    <hibernate-configuration>
+
+    <session-factory>
+
+        <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+
+        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/hb_instructor_tracker</property>
+
+        <property name="hibernate.connection.username">hbstudent</property>
+
+        <property name="hibernate.connection.password">Anirudh@tha1</property>
+
+        <property name="hibernate.connection.pool_size">10</property>
+
+        <property name="show_sql">true</property>
+
+        <property name="hibernate.transaction.factory_class">org.hibernate.transaction.JDBCTransactionFactory</property>
+
+        <property name="hibernate.current_session_context_class">thread</property>
+
+        <property name="dialect">org.hibernate.dialect.MySQLDialect</property>  
+
+      
+
+    <property name="hbm2ddl.auto">validate</property>
+
+    <property name="hibernate.id.new_generator_mappings">true</property>
+
+  
+
+    <!--the mapping resources here -->
+
+    </session-factory>
+
+</hibernate-configuration>

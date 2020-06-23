@@ -1,0 +1,9 @@
+package demo;
+
+import javax.persistence.*;
+
+@Entity
+@Table(name="course")
+public class Course {
+
+}

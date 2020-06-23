@@ -1,0 +1,52 @@
+package demo;
+
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
+
+public class EagerLazyJoinDemo {
+
+	public static void main(String[] args) {
+		//Session factory and session variable 
+		SessionFactory factory = new Configuration().configure().addAnnotatedClass(Course.class).addAnnotatedClass(InstructorMany.class).addAnnotatedClass(InstructorDetailsMany.class).buildSessionFactory();
+		Session session = factory.getCurrentSession();
+		
+		try
+		{
+			//Begin Transaction 
+			session.beginTransaction();
+			
+			int id = 1;
+			InstructorMany tempInstructor = session.get(InstructorMany.class, id);
+			
+			//creating hql query so as to use lazy loaded data after session is closed
+			Query<InstructorMany> query = session.createQuery("select i from instructor",InstructorMany.class);
+			
+			
+			//Instructor 
+			System.out.println(tempInstructor);
+			
+			//Instructor Details
+			System.out.println(tempInstructor.getInstructorDetailsMany());
+			
+			//Courses
+            //System.out.println(tempInstructor.getCourses());
+			
+			//commiting the session
+			session.getTransaction().commit();
+			session.close();
+		}
+		catch(Exception e)
+		{
+		  e.printStackTrace();	
+		}
+		finally
+		{
+			session.close();
+			factory.close();
+		}
+
+	}
+
+}

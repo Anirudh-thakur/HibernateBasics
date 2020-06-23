@@ -1,0 +1,12 @@
+package demo;
+
+public class MainDriverClass {
+
+	public static void main(String[] arg)
+	{
+		Instructor instructor = new Instructor("Anirudh","Thakur","anirudh.thakur94@gmail.com");
+		InstructorDetails instructorDet = new InstructorDetails("AA Memes","Coding");
+		instructor.setInstructorDetails(instructorDet);
+		
+	}
+}

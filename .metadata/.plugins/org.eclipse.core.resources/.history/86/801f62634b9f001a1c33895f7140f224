@@ -1,0 +1,50 @@
+package biDirectionalDemo;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
+
+import demo.Instructor;
+import demo.InstructorDetails;
+
+public class CreateDemo {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+		//Create factory and Session object 
+		SessionFactory factory = new Configuration().configure().addAnnotatedClass(Instructor.class).addAnnotatedClass(InstructorDetails.class).buildSessionFactory();
+		Session session = factory.getCurrentSession();
+		
+		//Create Instructor and Instructor Details object 
+		Instructor instructor = new Instructor("Anirudh","Thakur","anirudh.thakur94@gmail.com");
+		InstructorDetails instructorDet = new InstructorDetails("AA Memes","Coding");
+		
+		try
+		{
+		    // begin transaction 
+			session.beginTransaction();
+			
+			//Fetch instructor details by using id 
+			int id = 1;
+			InstructorDetails tempInstructor = session.get(InstructorDetails.class, id);
+			if(tempInstructor != null)
+			{
+				System.out.println("Instructor Details:"+tempInstructor);
+				// Get the associated instructor
+				System.out.println("Associated Instructor Details:"+tempInstructor.getInstructor());
+			}
+			//Commit transaction 
+			session.getTransaction().commit();
+		}
+		catch(Exception e )
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			session.close();
+		}
+	}
+
+}

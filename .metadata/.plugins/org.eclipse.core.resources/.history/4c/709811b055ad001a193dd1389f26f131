@@ -1,0 +1,31 @@
+package demo;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="student")
+public class Student {
+	//variables
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="id")
+	int id;
+	@Column(name="first_name")
+	String first_name;
+	@Column(name="last_name")
+	String last_name;
+	@Column(name="email")
+	String email;
+	
+	//Constructor
+	public Student() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+}

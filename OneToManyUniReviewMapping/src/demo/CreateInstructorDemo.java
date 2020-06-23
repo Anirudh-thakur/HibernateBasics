@@ -1,0 +1,46 @@
+package demo;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
+
+public class CreateInstructorDemo {
+
+	public static void main(String[] args) {
+		// Create factory and Session object
+		SessionFactory factory = new Configuration().configure().addAnnotatedClass(Course.class).addAnnotatedClass(InstructorMany.class).addAnnotatedClass(InstructorDetailsMany.class).buildSessionFactory();
+		Session session = factory.getCurrentSession();
+		
+		//Creating courses and instructor objects
+		InstructorMany instructor = new InstructorMany("Anirudh","Thakur","anirudh.thakur94@gmail.com");
+		InstructorDetailsMany details = new InstructorDetailsMany("AAMemes","Video Games");
+		Course course1 = new Course("Hibernate");
+		Course course2 = new Course("Spring");
+		instructor.AddCourse(course1);
+		instructor.AddCourse(course2);
+		instructor.setInstructorDetailsMany(details);
+		course1.setInstructor(instructor);
+		course2.setInstructor(instructor);
+		
+		//Adding them in database
+		try
+		{
+			session.beginTransaction();
+		    session.save(instructor);
+	    session.save(course1);
+	    session.save(course2);
+		    session.getTransaction().commit();
+		}
+		catch(Exception e)
+		{
+		  e.printStackTrace();	
+		}
+		finally
+		{
+			session.close();
+			factory.close();
+		}
+      
+	}
+
+}
